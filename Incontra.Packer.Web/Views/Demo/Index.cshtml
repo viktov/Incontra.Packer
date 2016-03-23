@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(function () {            
+
+            var json = { containers: [], boxes: [], options: { weightUnit: "kg", lengthUnit: "cm", showExecutionTime: 1, showTotalWeight: 1, showSpaceUsage: 1, showView3d: 1, showView2d: 0 } };
+
+            for (var i = 0; i < Math.random() * 10 + 1; i++)
+            {
+                json.containers.push({ w: Math.round(Math.random() * 100) + 1, h: Math.round(Math.random() * 100) + 1, d: Math.round(Math.random() * 100) + 1, wt: 0 });
+            }
+                
+            for (var i = 0; i < Math.random() * 100 + 1; i++)
+            {          
+                json.boxes.push({ w: Math.round(Math.random() * 30) + 1, h: Math.round(Math.random() * 30) + 1, d: Math.round(Math.random() * 30) + 1, wt: 0, q: Math.round(Math.random() * 30) + 1});                
+            }            
+
+            $('#taJsonRequest').val(JSON.stringify(json));
+            ko.applyBindings(resultVM);
+        });
+
+        var resultVM = {
+            Response: ko.observable(""),
+            ExecutionTime: ko.observable(""),
+            Status: ko.observable(""),
+            SpaceUsage: ko.observable(""),
+            Weight: ko.observable(""),
+            Message: ko.observable(""),
+            Containers: ko.observableArray([]),
+            getContainers: function (jsonData) {
+                var self = this;
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:53675/api/packing",
+                    data: jsonData,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        var response = JSON.stringify(data);
+                        self.Containers(data.containers);                        
+                        self.ExecutionTime(data.executionTime);
+                        self.Weight(data.weight);
+                        self.SpaceUsage(data.spaceUsage);
+                        self.Status(data.status);
+                        self.Message(data.message);
+                        self.Response(response);
+                    },
+                    error: function (data) {
+                        var response = JSON.parse(data.responseText);
+                        self.Containers(null);
+                        self.ExecutionTime(0);
+                        self.Status(response.status);
+                        self.Message(response.message);
+                        self.Response(response);
+                    }
+                });
+            }
+        };
+
+        var send = function () {
+            resultVM.getContainers($('#taJsonRequest').val());
+        };
+
+    </script>
+}
+
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead"></p>
+    <p></p>
+</div>
+
+<div class="row">
+    <div style="float:left;">
+        Request<br/>
+        <textarea id="taJsonRequest" rows="7" cols="70"></textarea><br/>
+        <input type="button" id="btnSend" value="Send" onclick="send()" />
+    </div>
+    <div style="float:left; margin-left: 10px;">
+        Response<br/>
+        <textarea id="taJsonResponse" data-bind="text: Response" rows="7" cols="70"></textarea>
+    </div>
+    <div style="clear:both;"></div>
+
+    Status: <span data-bind="text: Status"></span><br />
+    Execution time: <span data-bind="text: ExecutionTime"></span><br />
+    Space usage: <span data-bind="text: SpaceUsage"></span><br />
+    Total weight: <span data-bind="text: Weight"></span><br />
+    Message: <span data-bind="text: Message"></span><p />
+
+    <div data-bind="foreach: Containers">
+        <div class="container-result">
+            <div class="container-result-view3d" data-bind="html: view3d"></div>
+            <div class="container-result-text">
+                <b>Container</b>
+                (<span data-bind="text: w"></span>,
+                <span data-bind="text: h"></span>,
+                <span data-bind="text: d"></span>)<br />
+                Space usage:
+                <span data-bind="text: spaceUsage"></span><br />
+                Weight:
+                <span data-bind="text: weight"></span><br />
+
+                <div data-bind="foreach: boxes">
+                    Box
+                    (<span data-bind="text: w"></span>,
+                    <span data-bind="text: h"></span>,
+                    <span data-bind="text: d"></span>)
+                    Position:
+                    (<span data-bind="text: x"></span>,
+                    <span data-bind="text: y"></span>,
+                    <span data-bind="text: z"></span>)
+                    <br />
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+</div>

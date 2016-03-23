@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Log in";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<section id="loginForm">
+    <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li>
+                <input type="text" id="userName" data-bind="value: UserName"/>
+            </li>
+            <li>
+                <input type="password" id="password" data-bind="value: Password"/>
+            </li>
+        </ol>
+        <input type="button" value="Log in" onclick="login()" />
+    </fieldset>
+    <p>
+        @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>
+</section>
+
+
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(function () {
+            ko.applyBindings(loginData);
+        });
+
+        var loginData = {
+            UserName: ko.observable(""),
+            Password: ko.observable("")
+        };
+
+        var login = function () {            
+            $.ajax({
+            type: "POST",
+            url: "http://localhost:53675/api/login",
+            data: ko.toJSON(loginData),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                var response = JSON.stringify(data);
+                self.UserName(data.UserName);
+                alert(data.UserName);
+            },
+            error: function (data) {
+                var response = JSON.parse(data.responseText);
+                alert(response);
+            }
+        });
+    }
+
+    </script>
+}

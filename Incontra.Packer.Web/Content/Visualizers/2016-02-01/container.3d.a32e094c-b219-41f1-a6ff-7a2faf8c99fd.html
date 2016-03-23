@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="../../../Scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../../../Scripts/babylon.2.0.js"></script>
+    <style>
+        html, body {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        #renderCanvas {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            top: 0;
+            height: 100%;
+        }
+    </style>
+
+</head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script type="text/javascript">
+
+        var viewer3d = {
+            canvas: document.getElementById("renderCanvas"),
+            engine: "",
+            scene: "",
+
+            createScene: function (cameraDistance) {
+                var self = this;
+                
+                self.engine = new BABYLON.Engine(self.canvas, true);                
+                self.scene = new BABYLON.Scene(self.engine);
+                
+                var camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", 1, 0.8, cameraDistance, new BABYLON.Vector3(0, 0, 0), self.scene);
+                camera.attachControl(self.canvas, false);
+                var pointLight0 = new BABYLON.PointLight("point0", new BABYLON.Vector3(10, -10, -20), self.scene);
+                pointLight0.intensity = 2;
+                pointLight0.parent = camera;
+                
+                self.scene.clearColor = new BABYLON.Color3(200, 200, 255);
+                self.drawContainer(self.scene);
+                self.engine.runRenderLoop(function () {
+                    self.scene.render();
+                });
+            },
+
+            createBoxMaterial: function(scene, r, g, b, alpha) {
+                var boxMaterial = new BABYLON.StandardMaterial("boxMaterial", scene);                
+                boxMaterial.diffuseColor = new BABYLON.Color3(r, g, b);
+                boxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);  
+                boxMaterial.alpha = alpha;
+                return boxMaterial;
+            },
+
+            drawContainer: function (scene) {
+                var self = this;
+                var containerMaterial = new BABYLON.StandardMaterial("containerMaterial", scene);
+                containerMaterial.diffuseColor = new BABYLON.Color3(0.3, 0.3, 0.3);
+                containerMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+                containerMaterial.alpha = 0.2;
+                                
+                
+                    var containerMesh = new BABYLON.Mesh.CreateBox("containerMesh", 1, scene);
+                    containerMesh.scaling = new BABYLON.Vector3(60+0.2, 40+0.2, 35+0.2);
+                    containerMesh.material = containerMaterial;
+                    self.drawEdges(scene, containerMesh, new BABYLON.Color3(0, 0, 0), 0.1);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 0-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 0-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 0-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 0-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 13-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 13-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 13-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 13-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 26-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 26-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 26-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(0-60/2+14/2, 26-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 0-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 0-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 0-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 0-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 13-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 13-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 13-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 13-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 26-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 26-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 26-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(14-60/2+14/2, 26-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 0-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 0-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 0-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 0-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 13-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 13-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 13-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 13-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 26-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 26-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 26-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(28-60/2+14/2, 26-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 0-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 0-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 0-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 0-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 13-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 13-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 13-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 13-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 26-40/2+13/2, 0-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 26-40/2+13/2, 8-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 26-40/2+13/2, 16-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+                        var boxMesh = new BABYLON.Mesh.CreateBox("boxMesh", 1, scene);
+                        boxMesh.scaling = new BABYLON.Vector3(14,13,8);
+                        boxMesh.position = new BABYLON.Vector3(42-60/2+14/2, 26-40/2+13/2, 24-35/2+8/2);
+                        boxMesh.material = self.createBoxMaterial(scene, 0.55, 0.58, 0.35, 1);
+                        self.drawEdges(scene, boxMesh, new BABYLON.Color3(0, 0, 0), 0.5);
+            },
+
+            drawEdges: function (scene, mesh, color, alpha) {
+                var x = mesh.position.x;
+                var y = mesh.position.y;            
+                var z = mesh.position.z;
+                var width = mesh.scaling.x;
+                var height = mesh.scaling.y;            
+                var depth = mesh.scaling.z;
+                        
+                var edgesBack = BABYLON.Mesh.CreateLines("edgesBack", [
+                    new BABYLON.Vector3(x-width/2, y-height/2, z-depth/2),
+                    new BABYLON.Vector3(x+width/2, y-height/2, z-depth/2),      
+                    new BABYLON.Vector3(x+width/2, y+height/2, z-depth/2),
+                    new BABYLON.Vector3(x-width/2, y+height/2, z-depth/2),
+                    new BABYLON.Vector3(x-width/2, y-height/2, z-depth/2)
+                ], scene);
+                var edgesFront = BABYLON.Mesh.CreateLines("edgesFront", [
+                    new BABYLON.Vector3(x-width/2, y-height/2, z+depth/2),
+                    new BABYLON.Vector3(x+width/2, y-height/2, z+depth/2),      
+                    new BABYLON.Vector3(x+width/2, y+height/2, z+depth/2),
+                    new BABYLON.Vector3(x-width/2, y+height/2, z+depth/2),
+                    new BABYLON.Vector3(x-width/2, y-height/2, z+depth/2)
+                ], scene);
+                var edges1 = BABYLON.Mesh.CreateLines("edges1", [
+                    new BABYLON.Vector3(x-width/2, y-height/2, z+depth/2),
+                    new BABYLON.Vector3(x-width/2, y-height/2, z-depth/2)                       
+                ], scene);
+                var edges2 = BABYLON.Mesh.CreateLines("edges2", [
+                    new BABYLON.Vector3(x+width/2, y-height/2, z+depth/2),
+                    new BABYLON.Vector3(x+width/2, y-height/2, z-depth/2)                       
+                ], scene);
+                var edges3 = BABYLON.Mesh.CreateLines("edges3", [
+                    new BABYLON.Vector3(x+width/2, y+height/2, z+depth/2),
+                    new BABYLON.Vector3(x+width/2, y+height/2, z-depth/2)                       
+                ], scene);
+                var edges4 = BABYLON.Mesh.CreateLines("edges4", [
+                    new BABYLON.Vector3(x-width/2, y+height/2, z+depth/2),
+                    new BABYLON.Vector3(x-width/2, y+height/2, z-depth/2)                       
+                ], scene);
+                edgesBack.color = color;
+                edgesFront.color = color;
+                edges1.color = color;
+                edges2.color = color;
+                edges3.color = color;
+                edges4.color = color;
+                edgesBack.alpha = alpha;
+                edgesFront.alpha = alpha;
+                edges1.alpha = alpha;
+                edges2.alpha = alpha;
+                edges3.alpha = alpha;
+                edges4.alpha = alpha;
+
+            }
+        };
+        
+        $(function () {
+            viewer3d.createScene(120);
+        });
+        
+    </script>
+
+</body>
+</html>

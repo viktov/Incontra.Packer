@@ -1,0 +1,38 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".txt" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Configuration" #>
+<#@ assembly name="Microsoft.SqlServer.ConnectionInfo" #>
+<#@ assembly name="Microsoft.SqlServer.Smo" #>
+<#@ assembly name="Microsoft.SqlServer.Management.Sdk.Sfc" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="Microsoft.SqlServer.Management.Smo" #>
+<#@ import namespace="Microsoft.SqlServer.Management.Common" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Collections.Specialized" #>
+<#@ include file="ProcedureGenerator.ttinclude" #>
+<#	
+	var appName = "ModAppProto";
+	var path = Host.ResolvePath(@"../Incontra.Packer.Api/Web.config");
+    var map = new ExeConfigurationFileMap { ExeConfigFilename = path };
+    var config = System.Configuration.ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);    
+    var connectionStrings = config.ConnectionStrings.ConnectionStrings;	
+	SqlConnection cn = new SqlConnection(connectionStrings["DefaultConnection"].ConnectionString);
+	var DatabaseName = cn.Database;
+	Server server = new Server(new ServerConnection(cn));
+	Database database = server.Databases[cn.Database];
+	database.Refresh();	
+	var tables = database.Tables;
+	
+	ProcedureGenerator_Render(tables);	
+#>
