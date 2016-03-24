@@ -83,6 +83,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\01-Incontra.Packer.Tables.sql" />
+    <Content Include="SQL\02-Incontra.Packer.Procedures.sql" />
+    <Content Include="SQL\03-Incontra.Packer.DefaultData.sql" />
     <Content Include="_TemplateExecutor.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
