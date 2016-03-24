@@ -52,7 +52,7 @@ namespace Incontra.Packer.Api.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]PackRequest request)
+        public HttpResponseMessage Post([FromBody] Models.PackRequest request)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace Incontra.Packer.Api.Controllers
             return boxes.Select(b => b.q).Sum();
         }
 
-        private List<Container> GetPackedContainers(PackRequest request)
+        private List<Container> GetPackedContainers(Models.PackRequest request)
         {
             var packer = new Core.Packer();            
             var boxes = new List<Box>();
@@ -121,16 +121,16 @@ namespace Incontra.Packer.Api.Controllers
             return containers;
         }
 
-        private List<InputContainer> GetJsonContainers(List<Container> containers, PackRequest request)
+        private List<InputContainer> GetJsonContainers(List<Container> containers, Models.PackRequest request)
         {
             var packContainers = new List<InputContainer>();
-            var calculation = new Calculation
+            var calculation = new Data.Model.PackRequest
             {
                 UserID = 1,
-                ExecutionDate = DateTime.Now,
-                ExecutionTime = _executionTime
+                RequestDate = DateTime.Now,
+                CalculationTime = _executionTime
             };
-            calculation = _packerService.CalculationInsert(calculation);
+            calculation = _packerService.PackRequestInsert(calculation);
             _spaceTotal = 0;
             _spaceUsed = 0;
             foreach (var container in containers)

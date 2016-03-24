@@ -10,104 +10,44 @@ using System.Threading.Tasks;
 namespace Incontra.Packer.Data.Service
 {
     public class PackerService : IPackerService
-    {
-        private IBoxRepository _boxRepository;
-        private IContainerRepository _containerRepository;
-        private ICalculationRepository _calculationRepository;
+    {        
+        private IPackRequestRepository _packRequestRepository;
         private IUserRepository _userRepository;
-        private ILicenceRepository _licenceRepository;
+        private ILicenseRepository _licenseRepository;
 
-        public PackerService(IBoxRepository boxRepository,
-            IContainerRepository containerRepository,
-            ICalculationRepository calculationRepository,
+        public PackerService(
+            IPackRequestRepository calculationRepository,
             IUserRepository userRepository,
-            ILicenceRepository licenceRepository)
-        {
-            _boxRepository = boxRepository;
-            _containerRepository = containerRepository;
-            _calculationRepository = calculationRepository;
+            ILicenseRepository licenceRepository)
+        {            
+            _packRequestRepository = calculationRepository;
             _userRepository = userRepository;
-            _licenceRepository = licenceRepository;
+            _licenseRepository = licenceRepository;
         }
 
-        public List<Box> GetBoxAll()
+        public List<PackRequest> GetPackRequestAll()
         {
-            return _boxRepository.GetAll();
+            return _packRequestRepository.GetAll();
         }
 
-        public Box GetBoxByID(int id)
+        public PackRequest GetPackRequestByID(int id)
         {
-            return _boxRepository.GetByID(id);
+            return _packRequestRepository.GetByID(id);
         }
 
-        public List<Box> GetBoxByContainerID(int containerID)
+        public PackRequest PackRequestUpdate(PackRequest calculation)
         {
-            return _boxRepository.GetByContainerID(containerID);
+            return _packRequestRepository.Update(calculation);
         }
 
-        public Box BoxUpdate(Box box)
+        public PackRequest PackRequestInsert(PackRequest calculation)
         {
-            return _boxRepository.Update(box);
+            return _packRequestRepository.Insert(calculation);
         }
 
-        public Box BoxInsert(Box box)
+        public void PackRequestDelete(int id)
         {
-            return _boxRepository.Insert(box);
-        }
-
-        public void BoxDelete(int id)
-        {
-            _boxRepository.Delete(id);
-        }
-
-        public List<Container> GetContainerAll()
-        {
-            return _containerRepository.GetAll();
-        }
-
-        public Container GetContainerByID(int id)
-        {
-            return _containerRepository.GetByID(id);
-        }
-
-        public Container ContainerUpdate(Container container)
-        {
-            return _containerRepository.Update(container);
-        }
-
-        public Container ContainerInsert(Container container)
-        {
-            return _containerRepository.Insert(container);
-        }
-
-        public void ContainerDelete(int id)
-        {
-            _containerRepository.Delete(id);
-        }
-
-        public List<Calculation> GetCalculationAll()
-        {
-            return _calculationRepository.GetAll();
-        }
-
-        public Calculation GetCalculationByID(int id)
-        {
-            return _calculationRepository.GetByID(id);
-        }
-
-        public Calculation CalculationUpdate(Calculation calculation)
-        {
-            return _calculationRepository.Update(calculation);
-        }
-
-        public Calculation CalculationInsert(Calculation calculation)
-        {
-            return _calculationRepository.Insert(calculation);
-        }
-
-        public void CalculationDelete(int id)
-        {
-            _calculationRepository.Delete(id);
+            _packRequestRepository.Delete(id);
         }
 
         public List<User> GetUserAll()
@@ -135,27 +75,27 @@ namespace Incontra.Packer.Data.Service
             throw new NotImplementedException();
         }
 
-        public List<Licence> GetLicenceAll()
+        public List<License> GetLicenseAll()
         {
             throw new NotImplementedException();
         }
 
-        public Licence GetLicenceByID(int id)
+        public License GetLicenseByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void LicenceUpdate(Licence licence)
+        public void LicenseUpdate(License licence)
         {
             throw new NotImplementedException();
         }
 
-        public void LicenceInsert(Licence licence)
+        public void LicenseInsert(License licence)
         {
             throw new NotImplementedException();
         }
 
-        public void LicenceDelete(int id)
+        public void LicenseDelete(int id)
         {
             throw new NotImplementedException();
         }

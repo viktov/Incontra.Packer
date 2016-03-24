@@ -1,7 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[User_GetByID]
+﻿CREATE PROCEDURE [dbo].[User_GetByLoginAndPassword]
 (
-	@ID INT,
-	@LanguageID INT
+	@Login NVARCHAR(50),
+	@Password NVARCHAR(50)
 )
 AS
 BEGIN
@@ -17,5 +17,5 @@ BEGIN
 		[RegistrationDate],
 		[IsActive]
 	FROM [dbo].[User]
-	WHERE [ID] = @ID
+	WHERE [Login] = @Login AND [Password] = @Password
 END

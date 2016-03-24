@@ -6,7 +6,7 @@
     [PaymentID]  INT             NULL,
     [IssueDate]  DATETIME        NOT NULL,
     [DueDate]    DATETIME        NOT NULL,
-    [Amount]     NVARCHAR (4000) NULL,
+    [Amount]     DECIMAL (18, 2) NOT NULL,
     CONSTRAINT [PK_Invoice_ID] PRIMARY KEY CLUSTERED ([ID] ASC),
     CONSTRAINT [FK_Invoice_CurrencyID] FOREIGN KEY ([CurrencyID]) REFERENCES [dbo].[Currency] ([ID]),
     CONSTRAINT [FK_Invoice_LicenseID] FOREIGN KEY ([LicenseID]) REFERENCES [dbo].[License] ([ID]),

@@ -117,7 +117,7 @@ namespace Incontra.Packer.Data.Repository
             {
                 conn.Open();
                 var command = conn.CreateCommand();
-                command.CommandText = String.Format("EXEC [incontra_packer].[p_{0}_GetAll]", typeof(T).Name);
+                command.CommandText = String.Format("EXEC [dbo].[{0}_GetAll]", typeof(T).Name);
                 return GetModelList(command);             
             }            
 		}
@@ -128,7 +128,7 @@ namespace Incontra.Packer.Data.Repository
             {
                 conn.Open();
                 var command = conn.CreateCommand();
-                command.CommandText = String.Format("EXEC [incontra_packer].[p_{0}_GetByID] @ID", typeof(T).Name);
+                command.CommandText = String.Format("EXEC [dbo].[{0}_GetByID] @ID", typeof(T).Name);
                 command.Parameters.AddWithValue("@ID", id);
                 return GetModel(command);                
             }            
@@ -152,7 +152,7 @@ namespace Incontra.Packer.Data.Repository
                         command.Parameters.AddWithValue(parameter, property.GetValue(t, null) ?? DBNull.Value);
                     }
                 }
-                command.CommandText = String.Format("EXEC [incontra_packer].[p_{0}_Insert] {1}", typeof(T).Name, parameters.ToString());
+                command.CommandText = String.Format("EXEC [dbo].[{0}_Insert] {1}", typeof(T).Name, parameters.ToString());
                 return GetModel(command);
             }
 		}
@@ -175,7 +175,7 @@ namespace Incontra.Packer.Data.Repository
                         command.Parameters.AddWithValue(parameter, property.GetValue(t, null));
                     }                    
                 }
-                command.CommandText = String.Format("EXEC [incontra_packer].[p_{0}_Update] {1}", typeof(T).Name, parameters.ToString());
+                command.CommandText = String.Format("EXEC [dbo].[{0}_Update] {1}", typeof(T).Name, parameters.ToString());
                 return GetModel(command);
             }
 		}
@@ -186,7 +186,7 @@ namespace Incontra.Packer.Data.Repository
             {
                 conn.Open();
                 var command = conn.CreateCommand();
-                command.CommandText = String.Format("EXEC [incontra_packer].[p_{0}_Delete] @ID", typeof(T).Name);
+                command.CommandText = String.Format("EXEC [dbo].[{0}_Delete] @ID", typeof(T).Name);
                 command.Parameters.AddWithValue("@ID", id);
                 command.ExecuteNonQuery();
             }

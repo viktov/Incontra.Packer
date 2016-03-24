@@ -4,7 +4,7 @@
     [CurrencyID]  INT             NOT NULL,
     [LicenseID]   INT             NOT NULL,
     [PaymentDate] DATETIME        NOT NULL,
-    [Amount]      NVARCHAR (4000) NULL,
+    [Amount]      DECIMAL (18, 2) NOT NULL,
     CONSTRAINT [PK_Payment_ID] PRIMARY KEY CLUSTERED ([ID] ASC),
     CONSTRAINT [FK_Payment_CurrencyID] FOREIGN KEY ([CurrencyID]) REFERENCES [dbo].[Currency] ([ID]),
     CONSTRAINT [FK_Payment_LicenceID] FOREIGN KEY ([LicenseID]) REFERENCES [dbo].[License] ([ID]),

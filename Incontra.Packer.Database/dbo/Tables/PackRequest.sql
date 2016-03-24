@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[UserRequest] (
+﻿CREATE TABLE [dbo].[PackRequest] (
     [ID]              INT             IDENTITY (1, 1) NOT NULL,
     [UserID]          INT             NOT NULL,
     [RequestDate]     DATETIME        NOT NULL,

@@ -3,7 +3,7 @@
     [Login]            NVARCHAR (50)  NOT NULL,
     [Password]         NVARCHAR (50)  NOT NULL,
     [Email]            NVARCHAR (100) NOT NULL,
-    [CompanyName]      NVARCHAR (100) NULL,
+    [Company]          NVARCHAR (100) NULL,
     [Street]           NVARCHAR (100) NULL,
     [City]             NVARCHAR (100) NULL,
     [Code]             NVARCHAR (100) NULL,
@@ -13,4 +13,6 @@
     CONSTRAINT [PK_User_ID] PRIMARY KEY CLUSTERED ([ID] ASC),
     CONSTRAINT [FK_User_CountryID] FOREIGN KEY ([CountryID]) REFERENCES [dbo].[Country] ([ID])
 );
+
+
 

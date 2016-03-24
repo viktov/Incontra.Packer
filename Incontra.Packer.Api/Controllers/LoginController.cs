@@ -34,7 +34,7 @@ namespace Incontra.Packer.Api.Controllers
             try
             {
                 User user = new User();
-                user.UserName = request.UserName;
+                user.Login = request.Login;
                 user.Password = MD5Helper.GetHash(request.Password);                
                 if (_userService.IsLoginValid(user))
                 {                    

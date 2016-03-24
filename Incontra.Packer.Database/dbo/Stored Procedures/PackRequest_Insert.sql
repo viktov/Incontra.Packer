@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[UserRequest_Insert]
+﻿CREATE PROCEDURE [dbo].[PackRequest_Insert]
 (
 	@UserID INT,		
 	@RequestDate DATETIME,
@@ -9,7 +9,7 @@
 )
 AS
 BEGIN	
-	INSERT INTO [dbo].[UserRequest] (
+	INSERT INTO [dbo].[PackRequest] (
 	[UserID],		
 	[RequestDate],
 	[ResponseDate],

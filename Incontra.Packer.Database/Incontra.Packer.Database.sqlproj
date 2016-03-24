@@ -76,7 +76,6 @@
     <Build Include="dbo\Tables\PeriodTranslation.sql" />
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\PackageService.sql" />
-    <Build Include="dbo\Tables\UserRequest.sql" />
     <Build Include="dbo\Tables\SystemLog.sql" />
     <Build Include="dbo\Tables\Package.sql" />
     <Build Include="dbo\Tables\PackageTranslation.sql" />
@@ -95,7 +94,6 @@
     <Build Include="dbo\Stored Procedures\Country_Update.sql" />
     <Build Include="dbo\Stored Procedures\Country_GetByID.sql" />
     <Build Include="dbo\Stored Procedures\Country_GetAll.sql" />
-    <Build Include="dbo\Stored Procedures\UserRequest_Insert.sql" />
     <Build Include="dbo\Stored Procedures\SystemLog_Insert.sql" />
     <Build Include="dbo\Stored Procedures\Period_Insert.sql" />
     <Build Include="dbo\Stored Procedures\Period_Update.sql" />
@@ -128,8 +126,12 @@
     <Build Include="dbo\Stored Procedures\PackageService_GetByPackageID.sql" />
     <Build Include="dbo\Stored Procedures\Payment_Insert.sql" />
     <Build Include="dbo\Stored Procedures\Invoice_Insert.sql" />
+    <Build Include="dbo\Tables\PackRequest.sql" />
+    <Build Include="dbo\Stored Procedures\PackRequest_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetByLoginAndPassword.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\Incontra.Packer.Database_20160324_11-22-35.dacpac" />
+    <None Include="SqlSchemaCompare.scmp" />
   </ItemGroup>
 </Project>

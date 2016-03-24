@@ -15,12 +15,10 @@ namespace Incontra.Packer.Api
             // register all your components with the container here
             // it is NOT necessary to register your controllers
             
-            // e.g. container.RegisterType<ITestService, TestService>();
-            container.RegisterType<IBoxRepository, BoxRepository>();
-            container.RegisterType<IContainerRepository, ContainerRepository>();
-            container.RegisterType<ICalculationRepository, CalculationRepository>();
+            // e.g. container.RegisterType<ITestService, TestService>();            
+            container.RegisterType<IPackRequestRepository, PackRequestRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
-            container.RegisterType<ILicenceRepository, LicenceRepository>();
+            container.RegisterType<ILicenseRepository, LicenseRepository>();
             container.RegisterType<IPackerService, PackerService>();
             container.RegisterType<IUserService, UserService>();
             GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);

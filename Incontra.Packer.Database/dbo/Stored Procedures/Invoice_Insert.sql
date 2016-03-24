@@ -6,7 +6,7 @@
 	@PaymentID INT,
 	@IssueDate DATETIME,
 	@DueDate DATETIME,
-	@Amount NVARCHAR(4000)	
+	@Amount DECIMAL(18,2)
 )
 AS
 BEGIN		

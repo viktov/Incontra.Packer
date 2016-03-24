@@ -10,23 +10,24 @@ namespace Incontra.Packer.Data
 {
     public static class Logger
     {
-        private static IExceptionRepository _repository;
-        private static IExceptionRepository Repository
+        private static ISystemLogRepository _repository;
+        private static ISystemLogRepository Repository
         {
             get
             {
                 if (_repository == null)
-                    _repository = new ExceptionRepository();
+                    _repository = new SystemLogRepository();
                 return _repository;
             }            
         }
 
         public static void LogException(string exceptionMsg, int? userID)
         {
-            var exceptionLog = new ExceptionLog();
+            var exceptionLog = new SystemLog();
             exceptionLog.UserID = userID;
             exceptionLog.LogDate = DateTime.Now;
-            exceptionLog.Exception = exceptionMsg;
+            exceptionLog.Message = exceptionMsg;
+            exceptionLog.LogType = 2;
             Repository.Insert(exceptionLog);
         }
     }

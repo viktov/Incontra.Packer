@@ -40,39 +40,11 @@ namespace Incontra.Packer.Api.Controllers
         //}
 
         // GET api/container/5
-        [HttpGet]
-        public HttpResponseMessage Get(int id)
-        {
-            try
-            {
-                var container = _packerService.GetContainerByID(id);
-                var boxes = _packerService.GetBoxByContainerID(id);
-                var pContainer = ModelFactory.Create(container);
-                var pBoxes = new List<InputBox>();
-                pContainer.boxes = pBoxes;
-                foreach (var box in boxes)
-                {
-                    pBoxes.Add(ModelFactory.Create(box));
-                }
-                var pContainers = new List<InputContainer> { pContainer };
-                var packingResponse = new PackResponse();
-                packingResponse.containers = pContainers;
-                var response = this.Request.CreateResponse(HttpStatusCode.OK);
-                var settings = new JsonSerializerSettings()
-                        {
-                            ContractResolver = new CamelCasePropertyNamesContractResolver()
-                        };
-                response.Content = new StringContent(
-                    JsonConvert.SerializeObject(packingResponse, settings), Encoding.UTF8, "application/json");
-                return response;
-            }
-            catch (Exception e)
-            {
-                var response = this.Request.CreateResponse(HttpStatusCode.BadRequest);
-                response.Content = new StringContent(e.Message, Encoding.UTF8, "application/json");
-                return response;
-            }
-        }
+        //[HttpGet]
+        //public HttpResponseMessage Get(int id)
+        //{
+            
+        //}
 
         //// POST api/container
         //public void Post([FromBody]string value)

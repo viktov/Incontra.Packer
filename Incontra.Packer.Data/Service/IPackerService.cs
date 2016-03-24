@@ -10,24 +10,11 @@ namespace Incontra.Packer.Data.Service
 {
     public interface IPackerService
     {
-        List<Box> GetBoxAll();
-        Box GetBoxByID(int id);
-        List<Box> GetBoxByContainerID(int containerID);
-        Box BoxUpdate(Box box);
-        Box BoxInsert(Box box);
-        void BoxDelete(int id);
-        
-        List<Container> GetContainerAll();
-        Container GetContainerByID(int id);
-        Container ContainerUpdate(Container container);
-        Container ContainerInsert(Container container);
-        void ContainerDelete(int id);
-
-        List<Calculation> GetCalculationAll();
-        Calculation GetCalculationByID(int id);
-        Calculation CalculationUpdate(Calculation calculation);
-        Calculation CalculationInsert(Calculation calculation);
-        void CalculationDelete(int id);
+        List<PackRequest> GetPackRequestAll();
+        PackRequest GetPackRequestByID(int id);
+        PackRequest PackRequestUpdate(PackRequest calculation);
+        PackRequest PackRequestInsert(PackRequest calculation);
+        void PackRequestDelete(int id);
 
         List<User> GetUserAll();
         User GetUserByID(int id);
@@ -35,10 +22,10 @@ namespace Incontra.Packer.Data.Service
         void UserInsert(User user);
         void UserDelete(int id);
 
-        List<Licence> GetLicenceAll();
-        Licence GetLicenceByID(int id);
-        void LicenceUpdate(Licence licence);
-        void LicenceInsert(Licence licence);
-        void LicenceDelete(int id);
+        List<License> GetLicenseAll();
+        License GetLicenseByID(int id);
+        void LicenseUpdate(License licence);
+        void LicenseInsert(License licence);
+        void LicenseDelete(int id);
     }
 }

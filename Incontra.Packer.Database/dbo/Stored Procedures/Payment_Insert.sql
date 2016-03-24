@@ -4,7 +4,7 @@
 	@CurrencyID INT,
 	@LicenseID INT,
 	@PaymentDate DATETIME,
-	@Amount NVARCHAR(4000)	
+	@Amount DECIMAL(18,2)
 )
 AS
 BEGIN		
