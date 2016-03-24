@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Incontra.Packer.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{8b2cc8e5-935b-4e33-89dc-a62e95f016d0}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Incontra.Packer.Database</RootNamespace>
+    <AssemblyName>Incontra.Packer.Database</AssemblyName>
+    <ModelCollation>1045,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Polish_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Security\" />
+    <Folder Include="Snapshots" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\License.sql" />
+    <Build Include="dbo\Tables\Payment.sql" />
+    <Build Include="dbo\Tables\Currency.sql" />
+    <Build Include="dbo\Tables\Service.sql" />
+    <Build Include="dbo\Tables\Period.sql" />
+    <Build Include="dbo\Tables\Invoice.sql" />
+    <Build Include="dbo\Tables\ServiceTranslation.sql" />
+    <Build Include="dbo\Tables\PeriodTranslation.sql" />
+    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\PackageService.sql" />
+    <Build Include="dbo\Tables\UserRequest.sql" />
+    <Build Include="dbo\Tables\SystemLog.sql" />
+    <Build Include="dbo\Tables\Package.sql" />
+    <Build Include="dbo\Tables\PackageTranslation.sql" />
+    <Build Include="dbo\Tables\PackagePrice.sql" />
+    <Build Include="dbo\Tables\Language.sql" />
+    <Build Include="dbo\Tables\Country.sql" />
+    <Build Include="dbo\Tables\CountryTranslation.sql" />
+    <Build Include="dbo\Stored Procedures\Invoice_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Language_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Language_GetByID.sql" />
+    <Build Include="dbo\Stored Procedures\Language_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Currency_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Currency_GetByID.sql" />
+    <Build Include="dbo\Stored Procedures\Currency_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Country_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Country_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Country_GetByID.sql" />
+    <Build Include="dbo\Stored Procedures\Country_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\UserRequest_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\SystemLog_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Period_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Period_Update.sql" />
+    <Build Include="dbo\Stored Procedures\PackageService_GetByLicenceID.sql" />
+    <Build Include="dbo\Stored Procedures\Period_GetByID.sql" />
+    <Build Include="dbo\Stored Procedures\Period_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\User_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\User_Update.sql" />
+    <Build Include="dbo\Stored Procedures\User_GetByID.sql" />
+    <Build Include="dbo\Stored Procedures\Package_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Package_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Package_GetByID.sql" />
+    <Build Include="dbo\Stored Procedures\Package_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\PackagePrice_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\PackagePrice_GetByID.sql" />
+    <Build Include="dbo\Stored Procedures\PackagePrice_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\PackagePrice_GetByPackageID.sql" />
+    <Build Include="dbo\Stored Procedures\License_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\License_Update.sql" />
+    <Build Include="dbo\Stored Procedures\License_GetByID.sql" />
+    <Build Include="dbo\Stored Procedures\License_GetByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\License_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Service_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Service_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Service_GetByID.sql" />
+    <Build Include="dbo\Stored Procedures\Service_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\PackageService_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\PackageService_GetByID.sql" />
+    <Build Include="dbo\Stored Procedures\PackageService_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\PackageService_GetByPackageID.sql" />
+    <Build Include="dbo\Stored Procedures\Payment_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Invoice_Insert.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Snapshots\Incontra.Packer.Database_20160324_11-22-35.dacpac" />
+  </ItemGroup>
+</Project>

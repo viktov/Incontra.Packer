@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Period] (
+    [ID]   INT IDENTITY (1, 1) NOT NULL,
+    [Days] INT NOT NULL,
+    CONSTRAINT [PK_Period_ID] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
