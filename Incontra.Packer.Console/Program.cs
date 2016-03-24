@@ -23,7 +23,7 @@ namespace Incontra.Packer.Console
             long totalBoxesVolume = 0;
             decimal totalSpace = 0;
 
-            for (int j = 0; j < 1000000; j++)
+            for (int j = 0; j < 1000; j++)
             {
                 var containers = new List<Container>();
                 var boxes = new List<Box>();
@@ -36,7 +36,7 @@ namespace Incontra.Packer.Console
                 
                 for (int i = 0; i < random.Next(100) + 1; i++)
                 {
-                    var box = new Box(random.Next(80) + 1, random.Next(80) + 1, random.Next(80) + 1, 0);
+                    var box = new Box(random.Next(40) + 1, random.Next(40) + 1, random.Next(40) + 1, 0);
                     for (int k = 1; k < random.Next(20) + 2; k++)
                     {
                         var b = new Box(box.Width, box.Height, box.Depth, 1);
