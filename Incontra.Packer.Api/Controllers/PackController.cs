@@ -78,7 +78,7 @@ namespace Incontra.Packer.Api.Controllers
             }
             catch(Exception e)
             {                
-                Logger.LogException(e.ToString(), null);
+                //Logger.LogException(e.ToString(), null);
                 var packResponse = new PackResponse();
                 packResponse.status = HttpStatusCode.BadRequest.ToString();
                 packResponse.message = String.Format("{0}", e.ToString());
@@ -130,7 +130,7 @@ namespace Incontra.Packer.Api.Controllers
                 RequestDate = DateTime.Now,
                 CalculationTime = _executionTime
             };
-            calculation = _packerService.PackRequestInsert(calculation);
+            //calculation = _packerService.PackRequestInsert(calculation);
             _spaceTotal = 0;
             _spaceUsed = 0;
             foreach (var container in containers)
