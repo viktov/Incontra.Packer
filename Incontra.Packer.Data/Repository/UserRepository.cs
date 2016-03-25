@@ -17,7 +17,7 @@ namespace Incontra.Packer.Data.Repository
             {
                 conn.Open();
                 var command = conn.CreateCommand();
-                command.CommandText = "EXEC [dbo].[User_GetByLoginAndPassword] @Login, @Password";
+                command.CommandText = "EXEC [dbo].[User_GetByLoginAndPassworda] @Login, @Password";
                 command.Parameters.AddWithValue("@Login", user.Login);
                 command.Parameters.AddWithValue("@Password", user.Password);
                 user = GetModel(command);

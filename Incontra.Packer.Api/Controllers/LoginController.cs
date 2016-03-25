@@ -31,26 +31,30 @@ namespace Incontra.Packer.Api.Controllers
         public HttpResponseMessage Post([FromBody]LoginRequest request)
         {
             var response = this.Request.CreateResponse(HttpStatusCode.OK);
+            string info = "";
             try
             {
                 User user = new User();
                 user.Login = request.Login;
                 user.Password = MD5Helper.GetHash(request.Password);                
                 if (_userService.IsLoginValid(user))
-                {                    
-                    response.Content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+                {
+                    info = @"{""Message"": ""Login ok""}";                    
                 }
                 else
                 {
-                    response.Content = new StringContent("Login or password incorrect", Encoding.UTF8, "application/json");                   
+                    info = @"{""Message"": ""Login or password incorrect""}";                    
                 }                
             }
             catch (Exception e)
             {
                 Logger.LogException(e.ToString(), null);
-                response = this.Request.CreateResponse(HttpStatusCode.BadRequest);                
-                response.Content = new StringContent(e.Message, Encoding.UTF8, "application/json");
-                return response;
+                info = @"{""Message"": ""Unexpected error occured""}";
+                response = this.Request.CreateResponse(HttpStatusCode.BadRequest);            
+            }
+            finally
+            {
+                response.Content = new StringContent(info, Encoding.UTF8, "application/json");
             }
             return response;
         }

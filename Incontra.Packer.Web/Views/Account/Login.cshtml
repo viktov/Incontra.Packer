@@ -11,13 +11,14 @@
         <legend>Log in Form</legend>
         <ol>
             <li>
-                <input type="text" id="userName" data-bind="value: UserName"/>
+                <input type="text" id="userName" data-bind="value: Login"/>
             </li>
             <li>
                 <input type="password" id="password" data-bind="value: Password"/>
             </li>
         </ol>
         <input type="button" value="Log in" onclick="login()" />
+        <p/><span data-bind="text: Message"/>
     </fieldset>
     <p>
         @Html.ActionLink("Register", "Register") if you don't have an account.
@@ -35,8 +36,9 @@
         });
 
         var loginData = {
-            UserName: ko.observable(""),
-            Password: ko.observable("")
+            Login: ko.observable(""),
+            Password: ko.observable(""),
+            Message: ko.observable("")
         };
 
         var login = function () {            
@@ -48,12 +50,11 @@
             dataType: "json",
             success: function (data) {
                 var response = JSON.stringify(data);
-                self.UserName(data.UserName);
-                alert(data.UserName);
+                loginData.Message(data.Message);                
             },
             error: function (data) {
                 var response = JSON.parse(data.responseText);
-                alert(response);
+                loginData.Message(response.Message); 
             }
         });
     }
